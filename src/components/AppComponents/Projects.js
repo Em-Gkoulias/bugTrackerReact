@@ -24,7 +24,7 @@ const Projects = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (isLoading) {
-        return <div>Loading...</div>;
+        return <div className="spinner"></div>;
     } else {
         return (
             <div className="Projects">

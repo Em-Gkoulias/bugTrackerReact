@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -27,6 +28,9 @@ const Register = () => {
 
   return (
     <div>
+      <h2 className="distances loginForm loginHeader">
+        Complete the form to create an account
+      </h2>
       <form className="loginForm distances loginHeader">
         <input
           className="distances"
@@ -66,9 +70,15 @@ const Register = () => {
           type="submit"
           onClick={handleClick}
         >
-          Register
+          REGISTER
         </button>
       </form>
+      <h2 className="distances loginForm loginHeader">
+        If you already have an account
+        <Link className="registerLink" to="/login">
+          login here
+        </Link>
+      </h2>
     </div>
   );
 };

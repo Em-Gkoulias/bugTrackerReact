@@ -1,6 +1,7 @@
 $darkBlue: #12232E;
 $lighterBlue:  #007CC7;
-$lightestBlue: #4DA8DA;
+$testColor: #EEFBFB;
+// $lightestBlue: #EEFBFB;
 $shadowOfLight:  #EEFBFB;
 $deepRed: #b91e1e;
 $orange: rgb(235, 146, 13);
@@ -22,7 +23,7 @@ $orange: rgb(235, 146, 13);
 }
 
 *::selection {
-    color: $orange;
+    background-color: $orange;
 }
 
 ul {
@@ -286,7 +287,7 @@ textarea:focus {
         }
         
         .projectCRUD {
-            background-color: $lightestBlue;
+            background-color: $testColor;
             display: flex;
             justify-content: space-evenly;
             align-items: center;
@@ -310,11 +311,11 @@ textarea:focus {
             }
 
             .confirmButtonsBg {
-                background-color: $lightestBlue;
+                background-color: $testColor;
                 text-align: center;
 
                 p {
-                    background-color: $lightestBlue;
+                    background-color: $testColor;
                 }
 
                 .confirmButtons {
@@ -428,7 +429,7 @@ textarea:focus {
             }
 
             .bugsCrud {
-                background-color: $lightestBlue;
+                background-color: $testColor;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
@@ -457,11 +458,11 @@ textarea:focus {
                 }
 
                 .confirmButtonsBg {
-                    background-color: $lightestBlue;
+                    background-color: $testColor;
                     text-align: center;
 
                     p {
-                        background-color: $lightestBlue;
+                        background-color: $testColor;
                     }
 
                     .confirmButtons {
@@ -680,4 +681,67 @@ textarea:focus {
     box-shadow: none;
     color: $shadowOfLight;
     transform: translateX(1%) translateY(1%)
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+
+// .spinner {
+//   width: 40px;
+//   height: 40px;
+//   background-color: $shadowOfLight;
+
+//   margin: 100px auto;
+//   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+//   animation: sk-rotateplane 1.2s infinite ease-in-out;
+// }
+
+// @-webkit-keyframes sk-rotateplane {
+//   0% { -webkit-transform: perspective(120px) }
+//   50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+//   100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+// }
+
+// @keyframes sk-rotateplane {
+//   0% { 
+//     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+//     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+//   } 50% { 
+//     transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+//     -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+//   } 100% { 
+//     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+//     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+//   }
+// }
+
+.lds-dual-ring {
+//   display: block;
+//   width: 40px;
+//   height: 40px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -32,9 +32,11 @@ const Log = () => {
     //     </div>
     // );
 
-    return <div>
+    return (
+      <div>
         <h1>This page is under construction...</h1>
-    </div>
+      </div>
+    );
 };
 
 export default Log;

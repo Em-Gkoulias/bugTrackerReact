@@ -22,7 +22,7 @@ const DoughnutChart = () => {
     if (error) {
         return <div>Error: {error}</div>
     } else if (isLoading) {
-        return <div>Loading...</div>
+        return <div class="lds-dual-ring"></div>;
     } else {
         return (
             <div className="DoughnutChart">

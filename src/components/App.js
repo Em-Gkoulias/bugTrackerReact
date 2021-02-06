@@ -23,7 +23,7 @@ import CreateBug from "./ProjectsComponents/CreateBug";
 import EditBug from "./ProjectsComponents/EditBug";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+ 
 import "./style.scss";
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
       <Auth />
     );
   } else if (isLoading) {
-    return <h1>Loading...</h1>
+    return <div class="lds-dual-ring"></div>
   } else {
     return (
       <Router>
@@ -83,30 +83,30 @@ function App() {
     );
   }
 
-  return (
-    <Router>
-      <div className="App">
-        <h1>HELLO {user.name}</h1>
-        <Sidebar />
-        <Navbar />
-        <Switch>
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
+  // return (
+  //   <Router>
+  //     <div className="App">
+  //       <h1>HELLO {user.name}</h1>
+  //       <Sidebar />
+  //       <Navbar />
+  //       <Switch>
+  //         <Route path="/login" exact component={Login} />
+  //         <Route path="/register" exact component={Register} />
 
-          <Route path="/" exact component={Charts} />
-          <Route path="/projects" exact component={Projects} />
-          <Route path="/projects/create" exact component={CreateProject} />
-          <Route path="/projects/:id/edit" exact component={EditProject} />
-          <Route path="/projects/:id/create" exact component={CreateBug} />
-          <Route path="/projects/:id/:bugId/edit" exact component={EditBug} />
-          <Route path="/projects/:id" component={Project} />
-          <Route path="/log" component={Log} />
-          <Route path="/team" component={Team} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
-  );
+  //         <Route path="/" exact component={Charts} />
+  //         <Route path="/projects" exact component={Projects} />
+  //         <Route path="/projects/create" exact component={CreateProject} />
+  //         <Route path="/projects/:id/edit" exact component={EditProject} />
+  //         <Route path="/projects/:id/create" exact component={CreateBug} />
+  //         <Route path="/projects/:id/:bugId/edit" exact component={EditBug} />
+  //         <Route path="/projects/:id" component={Project} />
+  //         <Route path="/log" component={Log} />
+  //         <Route path="/team" component={Team} />
+  //       </Switch>
+  //       <Footer />
+  //     </div>
+  //   </Router>
+  // );
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
-import Register from './Register';
+import Register from "./Register";
 
 const Login = () => {
   const history = useHistory();
@@ -9,6 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -21,18 +22,22 @@ const Login = () => {
           password: password,
         })
         .then((response) => {
-          console.log(response)
-          window.location.reload()
+          console.log(response);
+          setIsLoading(false);
+          window.location.reload();
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          setIsLoading(false);
+        });
     });
   };
 
   return (
     <div>
-      <h1 className="distances loginForm loginHeader">
+      <h2 className="distances loginForm loginHeader">
         Login here to enter the application...
-      </h1>
+      </h2>
       <form className="distances loginForm" action="">
         <input
           className="distances"
@@ -50,15 +55,20 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="distances authButtons" type="submit" onClick={handleClick}>
+        <button
+          className="distances authButtons"
+          type="submit"
+          onClick={handleClick}
+        >
           LOG IN
         </button>
       </form>
-      <h1 className="distances loginForm loginHeader">
-        ... or 
-        <Link className="registerLink" to="/register">register here</Link>
-         if you don't have an account already.
-      </h1>
+      <h2 className="distances loginForm loginHeader">
+        ... or if you want to create a new account
+        <Link className="registerLink" to="/register">
+          register here
+        </Link>
+      </h2>
     </div>
   );
 };
