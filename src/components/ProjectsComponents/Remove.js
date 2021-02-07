@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -15,20 +16,16 @@ const Remove = (props) => {
 
     const handleRemove = (e) => {
         e.preventDefault();
-        console.log(id, title, project_id, description, created_at, updated_at);
+        axios.defaults.withCredentials = true;
+        axios.defaults.baseURL = "http://localhost:8001";
 
-        fetch(`http://127.0.0.1:8001/api/bugs/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        })
-            .then((res) => res.json())
+        axios.delete(`/api/bugs/${id}`)
             .then((response) => {
-                console.log(response);
-                history.push('/');
+                console.log(response)
+                history.push("/");
                 history.replace(`/projects/${project_id}`);
-            });
+            })
+            .catch(error => console.log(error))
     };
 
     return (

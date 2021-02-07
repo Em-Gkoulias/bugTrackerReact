@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
-import axios from 'axios';
+import axios from "axios";
 
 import Login from "./AuthComponents/Login";
 import Register from "./AuthComponents/Register";
-import Auth from './Auth';
+import Auth from "./Auth";
 
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -23,7 +23,7 @@ import CreateBug from "./ProjectsComponents/CreateBug";
 import EditBug from "./ProjectsComponents/EditBug";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
- 
+
 import "./style.scss";
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
     axios
       .get("/api/user")
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setUser(response.data);
         setIsLoading(false);
         // window.location.
@@ -58,7 +58,7 @@ function App() {
       <Auth />
     );
   } else if (isLoading) {
-    return <div class="lds-dual-ring"></div>
+    return <div className="lds-dual-ring"></div>;
   } else {
     return (
       <Router>
@@ -67,46 +67,37 @@ function App() {
           <Sidebar />
           <Navbar user={user} />
           <Switch>
-            <Route path="/projects" exact component={Projects} />
-            <Route path="/projects/create" exact component={CreateProject} />
-            <Route path="/projects/:id/edit" exact component={EditProject} />
+            <Route
+              path="/projects"
+              exact
+              render={(props) => <Projects {...props} user={user} />}
+            />
+            <Route
+              path="/projects/create"
+              exact
+              render={(props) => <CreateProject {...props} user={user} />}
+            />
+            <Route
+              path="/projects/:id/edit"
+              exact
+              render={(props) => <EditProject {...props} user={user} />}
+            />
             <Route path="/projects/:id/create" exact component={CreateBug} />
             <Route path="/projects/:id/:bugId/edit" exact component={EditBug} />
             <Route path="/projects/:id" component={Project} />
             <Route path="/log" component={Log} />
             <Route path="/team" component={Team} />
-            <Route path="*" exact component={Charts} />
+            <Route
+              path="*"
+              exact
+              render={(props) => <Charts {...props} user={user} />}
+            />
           </Switch>
           <Footer />
         </div>
       </Router>
     );
   }
-
-  // return (
-  //   <Router>
-  //     <div className="App">
-  //       <h1>HELLO {user.name}</h1>
-  //       <Sidebar />
-  //       <Navbar />
-  //       <Switch>
-  //         <Route path="/login" exact component={Login} />
-  //         <Route path="/register" exact component={Register} />
-
-  //         <Route path="/" exact component={Charts} />
-  //         <Route path="/projects" exact component={Projects} />
-  //         <Route path="/projects/create" exact component={CreateProject} />
-  //         <Route path="/projects/:id/edit" exact component={EditProject} />
-  //         <Route path="/projects/:id/create" exact component={CreateBug} />
-  //         <Route path="/projects/:id/:bugId/edit" exact component={EditBug} />
-  //         <Route path="/projects/:id" component={Project} />
-  //         <Route path="/log" component={Log} />
-  //         <Route path="/team" component={Team} />
-  //       </Switch>
-  //       <Footer />
-  //     </div>
-  //   </Router>
-  // );
 }
 
 export default App;

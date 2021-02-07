@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {Doughnut} from "react-chartjs-2";
+import axios from 'axios';
 
-const DoughnutChart = () => {
+const DoughnutChart = ({user}) => {
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -11,25 +12,30 @@ const DoughnutChart = () => {
     const data = [];
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8001/api/projects")
-            .then((res) => res.json())
-            .then((result) => {
-                setProjects(result);
-                setIsLoading(false);
-            })
+        axios.defaults.withCredentials = true;
+        axios.defaults.baseURL = "http://127.0.0.1:8001";
+        axios.get("/api/projects")
+            .then(response => {
+                setProjects(response.data)
+                console.log(response.data);
+                setIsLoading(false)
+            }).catch(error => console.log(error))
     }, []);
 
     if (error) {
         return <div>Error: {error}</div>
     } else if (isLoading) {
+        console.log(projects);
         return <div class="lds-dual-ring"></div>;
     } else {
         return (
             <div className="DoughnutChart">
 
                 {projects.map((project) => {
-                    labels.push(project["title"]);
-                    data.push(project["bugs"].length);
+                    if (project.profile_id == user.id) {
+                        labels.push(project["title"]);
+                        data.push(project["bugs"].length);
+                    }
                 })}
 
                 <Doughnut

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import axios from 'axios';
 
 const CreateBug = () => {
     const history = useHistory();
@@ -11,27 +12,22 @@ const CreateBug = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://127.0.0.1:8001/api/bugs`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                project_id: id,
-                title: title,
-                description: description,
-            }),
+        axios.defaults.withCredentials = true;
+        axios.defaults.baseURL = 'http://localhost:8001';
+
+        axios.post(`/api/bugs`, {
+            project_id: id,
+            title: title,
+            description: description
+        }).then((response) => {
+            console.log(response)
+            history.push(`/projects/${id}`); 
         })
-            .then((res) => console.log(res))
-            .then((result) => {
-                console.log(result);
-                history.push(`/projects/${id}`); 
-            })
     }
 
     return (
         <div className="CreateBug">
-            <h1 className="createBugHeader">Add new bug at project: </h1>
+            <h1 className="createBugHeader">Add new bug at project: {}</h1>
             <form
                 className="addBugForm"
             >

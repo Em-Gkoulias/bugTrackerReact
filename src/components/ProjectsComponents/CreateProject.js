@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import axios from 'axios';
 
-const CreateProject = () => {
+const CreateProject = ({user}) => {
     let history = useHistory();
 
     const [title, setTitle] = useState("");
@@ -11,21 +12,17 @@ const CreateProject = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://127.0.0.1:8001/api/projects`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                title: title,
-                description: description,
-            }),
-        })
-            .then((res) => console.log(res))
-            .then((result) => {
-                console.log(result);
-                history.push(`/projects`);
-            });
+        axios.defaults.withCredentials = true;
+        axios.defaults.baseURL = "http://localhost:8001";
+
+        axios.post('/api/projects', {
+            profile_id: user.id,
+            title: title,
+            description: description,
+        }).then(response => {
+            console.log(response)
+            history.push('/projects');
+        }).catch((error) => console.log(error))
     };
 
     return (
